@@ -1,15 +1,21 @@
+import { Container } from "react-bootstrap";
 
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import BooksTable from "./components/BooksTable";
 
-
-
-const App=()=> {
-
-
+const App = () => {
   return (
     <>
-    <h1>Welcome to Book Reviews by Wei Nee</h1>
+      <Header />
+      <main>
+        <Container>
+          <BooksTable />
+        </Container>
+      </main>
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
