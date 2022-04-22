@@ -5,6 +5,7 @@ export default (entries = [], action) => {
     case "CREATE":
       return entries;
     default:
+      return { ...entries };
       break;
   }
 };
