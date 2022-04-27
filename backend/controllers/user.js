@@ -1,13 +1,13 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-import { User } from "../models/user";
+import UserModal from "../model/user.js";
 
 export const signIn = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserModal.findOne({ email });
 
     if (!existingUser) {
       return res.status(400).json({
@@ -47,10 +47,10 @@ export const signIn = async (req, res) => {
 };
 
 export const register = async (req, res) => {
-  const { fName, lName, email, password, confirmPassword } = req.body;
+  const { firstName, lastName, email, password, confirmPassword } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserModal.findOne({ email });
 
     if (existingUser) {
       return res.status(400).json({
@@ -66,10 +66,10 @@ export const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const result = await User.create({
+    const result = await UserModal.create({
       email,
       password: hashedPassword,
-      name: `${fName} ${lName}`,
+      name: `${firstName} ${lastName}`,
     });
 
     const token = jwt.sign(
@@ -82,7 +82,7 @@ export const register = async (req, res) => {
       result,
       token,
     });
-  } catch {
+  } catch (e) {
     res.status(500).send({
       message: "Something went wrong",
     });
