@@ -10,7 +10,7 @@ import Auth from "./components/Auth/Auth";
 const App = () => {
   const signedIn = false;
   return (
-    <>
+    <div id="wrapper">
       <Header />
       <main>
         <Container className="d-flex align-items-center">
@@ -23,7 +23,7 @@ const App = () => {
         </Container>
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 
